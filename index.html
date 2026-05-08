@@ -12,7 +12,7 @@
 
     <header>
 
-        <div class="header">
+        <div class="c-header">
             <div class="header-inner">
                 <a href="index.html" class="header-logo">
                     <img scr="assets/images/logo.png" alt="logo">
@@ -27,34 +27,100 @@
                 </ul>
             </nav>
             <div class="lang-change">
-                <img src="assets/images/lang-icon.png" alt="lang-icon"
+                <img src="assets/images/lang-icon.png" alt="lang-icon">
             </div>
-            <div id="header-serach-bar">
+            <div class="header-serach-bar">
                 <p>検索</p>
                 <img scr="assets/images/serach-icon.pmg" alt="serach-icon">
+            <button class="ham" id="ham-js" aria-label="メニュー"></button>
             </div>
-            <button class="ham" id="ham-js" aria-label="メニュー">
-                
-            </button>
         </div>
 
     </header>
 
 
     <main>
-        <section id="main-content">
+        
+        <section class="main-content">
+            <div class="hero">
+                <div class="l-container">
+                    <div class="hero-wrapper">
+                        <h1 class="hero-title">ようこそ</h1>
+                        <p class="hero-text">学校生活はつらい</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <section class="top-news">
+            <div class="c-top-news">
+                <div class="c-top-news-text">
+                    <h3 class="top-news-text">News</h3>
+                </div>
+                <div class="l-top-news">
+                    <dl class="news-list">
+                    <a href="history/index.html" class="a-news-list">
+                        <dt>2025/05/08</dt>
+                        <dd>初期版作成</dd>
+                    </a></dl>
+                </div>
+            </div>
+        </section>
+
+        <section class="l-thesis">
+            <div class="c-scroller">
+                <h3 class="c-scroller__title">論文</h3>
+                <div class="c-scroller__track-wrap">
+                    <button class="scroller_nav-btn" id="prev">&lt;</button>
+                    <div class="scroller_track" id="track">
+                        <a href="history/thesis/test-1.html" class="scroller__card">
+                            <div class="scroller_img"><img src="" alt=""></div>
+                            <p>overwatchにおける<br>ストレスによるパフォーマンス変化</p>
+                        </a>
+                        <a href="history/thesis/test-2.html" class="scroller__card">
+                            <div class="scroller_img"><img src="" alt=""></div>
+                            <p>テスト2</p>
+                        </a>
+                        <a href="history/thesis/test-3.html" class="scroller__card">
+                            <div class="scroller_img"><img src="" alt=""></div>
+                            <p>テスト3</p>
+                        </a>
+                        <a href="history/thesis/test-4.html" class="scroller__card">
+                            <div class="scroller_img"><img src="" alt=""></div>
+                            <p>テスト4</p>
+                        </a>
+                        <a href="history/thesis/test-5.html" class="scroller__card">
+                            <div class="scroller_img"><img src="" alt=""></div>
+                            <p>テスト5</p>
+                        </a>
+                    </div>
+                    <button class="scroller_nav-btn" id="next">&gt;</button>
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer>
-
+    <footer class="footer">
+        <div class="footer_inner">
+            <div class="footer_info">
+                <div class="fotter_logo-text">RedFox-base</div>
+                <p class="fotter_address">TEL: 000-0000-0000<br>Mail: s24k1001de@chibatech.ac.jp</p>
+            </div>
+            <div class="footer_nav">
+                <ul class="footer_nav-list">
+                    <li class="footer_nav-list-item"><a href="index.html">トップ</a></li>
+                    <li class="footer_nav-list-item"><a href="resume.html">経歴</a></li>
+                    <li class="footer_nav-list-item"><a href="portfolio".html">実績</a></li>
+                    <li class="footer_nav-list-item"><a href="history.html">記録</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer_copyright">&copy; 2026 RedFox-base Co., Ltd. All Rights Reserved.</div>
     </footer>
+    <button class="back-to-top" id="back-to-top-js" aria-label="トップに戻る">↑</button>
+
+    <script src="js/main.js" defer></script>
 
 </body>
-
-<script>
-
-</script>
 
 </html>
