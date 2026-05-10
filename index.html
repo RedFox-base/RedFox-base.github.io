@@ -10,29 +10,43 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
 
-    <header>
+    <header class="header">
 
-        <div class="c-header">
-            <div class="header-inner">
+        <div class="header-inner">
+            <div class="header-left">
                 <a href="index.html" class="header-logo">
-                    <img scr="assets/images/logo.png" alt="logo">
+                    <img src="assets/images/logo.png" alt="logo">
                 </a>
+                <div class="header-title">
+                    <a href="index.html" alt="title">
+                        <p class="header-title-text">REDFOX_base</p>
+                    </a>
+                </div>
             </div>
-            <nav class="nav" id="nav-js">
-                <ul class="nav-list">
-                    <li class="nav-list-item"><a href="index.html">トップ</a></li>
-                    <li class="nav-list-item"><a href="resume.html">経歴</a></li>
-                    <li class="nav-list-item"><a href="portfolio".html">実績</a></li>
-                    <li class="nav-list-item"><a href="history.html">記録</a></li>
-                </ul>
-            </nav>
-            <div class="lang-change">
-                <img src="assets/images/lang-icon.png" alt="lang-icon">
-            </div>
-            <div class="header-serach-bar">
-                <p>検索</p>
-                <img scr="assets/images/serach-icon.pmg" alt="serach-icon">
-            <button class="ham" id="ham-js" aria-label="メニュー"></button>
+
+            <div class="header-right">
+                <nav class="nav" id="nav-js">
+                    <ul class="nav-list">
+                        <li class="nav-list-item"><a href="index.html">トップ</a></li>
+                        <li class="nav-list-item"><a href="resume/index.html">経歴</a></li>
+                        <li class="nav-list-item"><a href="portfolio/index.html">実績</a></li>
+                        <li class="nav-list-item"><a href="history/index.html">記録</a></li>
+                    </ul>
+                </nav>
+
+                <div class="lang-change">
+                    <a href="en/index.html">
+                        <img src="assets/images/lang-icon.png" alt="lang-icon">
+                    </a>
+                </div>
+
+                <form action="#" method="get" class="header-serach-bar" id="search-bar">
+                    <input type="text" name="q" placeholder="検索" aria-label="検索">
+                    <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
+                        <img src="assets/images/search-icon.png" alt="search-icon" id="search-icon">
+                    </button>
+                </form>
+                
             </div>
         </div>
 
@@ -40,8 +54,8 @@
 
 
     <main>
-        
-        <section class="main-content">
+
+        <section class="main-content" id="hero-section">
             <div class="hero">
                 <div class="l-container">
                     <div class="hero-wrapper">
@@ -59,10 +73,15 @@
                 </div>
                 <div class="l-top-news">
                     <dl class="news-list">
-                    <a href="history/index.html" class="a-news-list">
-                        <dt>2025/05/08</dt>
-                        <dd>初期版作成</dd>
-                    </a></dl>
+                        <a href="history/news-2026/0510.html" class="a-news-list">
+                            <dt>2025/05/10</dt>
+                            <dd>ヘッダー、ニュース、CSSの調整</dd>
+                        </a>
+                        <a href="history/news-2026/0508.html" class="a-news-list">
+                            <dt>2025/05/08</dt>
+                            <dd>初期版作成</dd>
+                        </a>
+                    </dl>
                 </div>
             </div>
         </section>
@@ -108,10 +127,10 @@
             </div>
             <div class="footer_nav">
                 <ul class="footer_nav-list">
-                    <li class="footer_nav-list-item"><a href="index.html">トップ</a></li>
-                    <li class="footer_nav-list-item"><a href="resume.html">経歴</a></li>
-                    <li class="footer_nav-list-item"><a href="portfolio".html">実績</a></li>
-                    <li class="footer_nav-list-item"><a href="history.html">記録</a></li>
+                    <li class="footer-nav-list-item"><a href="index.html">トップ</a></li>
+                    <li class="footer-nav-list-item"><a href="resume/index.html">経歴</a></li>
+                    <li class="footer-nav-list-item"><a href="portfolio/index.html" .html">実績</a></li>
+                    <li class="footer-nav-list-item"><a href="history/index.html">記録</a></li>
                 </ul>
             </div>
         </div>
