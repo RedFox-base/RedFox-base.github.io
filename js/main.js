@@ -1,4 +1,54 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('#header-js');
+    const heroSection = document.querySelector('#hero-section');
+
+    const observerOptions = {
+        // メインコンテンツが少しでも画面外に出始めたら判定
+        root: null,
+        rootMargin: "-80px 0px 0px 0px", // ヘッダーの高さ分くらいを判定基準にする
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // メインコンテンツ（青背景）の中にいる時
+                header.classList.add('is-hero');
+            } else {
+                // それ以外の白いエリアにいる時
+                header.classList.remove('is-hero');
+            }
+        });
+    }, observerOptions);
+
+    observer.observe(heroSection);
+
+
+
+    // 検索バーアニメ
+
+    const searchBar = document.getElementById('search-bar');
+    const searchInput = document.getElementById('search-input');
+
+    // 検索バー（またはアイコン）をクリックした時の動作
+    searchBar.addEventListener('click', function (e) {
+        // まだ開いていない場合のみ実行
+        if (!this.classList.contains('is-open')) {
+            this.classList.add('is-open');
+            searchInput.focus(); // 自動でカーソルを入れる
+        }
+    });
+
+    // 検索バーの外側をクリックしたら閉じる
+    document.addEventListener('click', function (e) {
+        if (!searchBar.contains(e.target)) {
+            searchBar.classList.remove('is-open');
+            searchInput.value = ""; // 閉じるときに中身をリセットする場合
+        }
+    });
+
+
+
     // ----------------------------------------------------
     // ハンバーガーメニュー制御
     // ----------------------------------------------------

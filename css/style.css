@@ -1,5 +1,5 @@
 /* =========================================
-   1. デザイン変数（元のCSSから継承）
+   1. デザイン変数
    ========================================= */
 :root {
   --color-primary: #1a8897;
@@ -37,82 +37,156 @@ ul {
 }
 
 /* =========================================
-   3. ヘッダー（header）
+   3. ヘッダー（header）修正
    ========================================= */
-/* HTML: <div class="c-header"> (ここだけ c- がついていました) */
-.c-header {
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px 4%;
-  position: sticky;
+
+.header {
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
   z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  
+  background-color: white;
 }
 
 .header-inner {
   display: flex;
   align-items: center;
+  justify-content: space-between; 
+  padding: 10px 30px; 
+  max-width: none;
 }
 
-.header-logo img {
-  height: 40px;
-}
-
-/* ナビゲーション */
-.nav-list {
+/* --- 左側：ロゴエリア --- */
+.header-left {
   display: flex;
+  align-items: center;
   gap: 20px;
 }
 
+.header-logo img {
+  display: block;
+  width: 65px;  
+  height: 65px;
+  object-fit: contain;
+}
+
+.header-title-text {
+  font-weight: bold;
+  font-size: 30px;
+  color: black;
+  letter-spacing: 5px;
+  text-align: center;
+}
+
+/* --- 右側：ナビ・言語・検索エリア --- */
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+/* ナビゲーションの文字 */
+.nav-list {
+  display: flex;
+  gap: 28px;
+}
+
 .nav-list-item a {
+  font-family: sans-serif;
   font-weight: bold;
   font-size: 14px;
+  color: black;
 }
 
-.nav-list-item a:hover {
-  color: var(--color-primary);
+.lang-change {
+    position: relative; 
+    display: flex;
+    align-items: center;
 }
 
-/* 検索バー・言語切り替え */
+.lang-change::before {
+    content: "";
+    display: block;
+    background: #DCDCDC;
+    width: 0.9px;
+    height: 30px;     
+    position: absolute;
+    left: 24px;
+    top: 50%;
+    transform: translateY(-50%); 
+}
+
+/* 言語アイコン */
 .lang-change img {
-  width: 24px;
+  width: 36px;
+  height: auto;
+  display: block;
+  margin-right: 20px;
+  margin-left: 50px;
+}
+
+/* 検索バー（色は固定） */
+.header-serach-bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 7px;
+  background: #f0f0f0; 
+  padding: 7px 15px;
+  border-radius: 20px;
+  width: 100px;
+
+  transition: width 0.3s ease; /* 0.4秒かけて変化 */
+  overflow: hidden; /* はみ出た中身を隠す */
   cursor: pointer;
 }
 
-.header-serach-bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #f0f0f0;
-  padding: 5px 12px;
-  border-radius: 4px;
+.header-serach-bar.is-open {
+  width: 200px; /* 指定の300pxまで広げる */
+}
+
+.header-serach-bar input {
+  width: 100%;
+  background: none;   /* 背景を消す */
+  border: none;       /* 枠線を消す */
+  outline: none;      /* クリックした時の青い枠線も消す */
+  font-size: 13px;
+  color: var(--color-text-muted);
+  padding: 0;         /* 余計な余白を消す */
+  margin: 0;
 }
 
 .header-serach-bar p {
-  font-size: 12px;
+  text-align: left;
+  font-size: 13px;
   color: var(--color-text-muted);
+  font-weight: bold;
 }
 
 .header-serach-bar img {
   width: 16px;
+  height: auto;
 }
 
-/* ハンバーガーボタン */
 .ham {
-  width: 30px;
-  height: 30px;
-  background: #333;
-  border: none;
-  cursor: pointer;
-  margin-left: 10px;
+  display: none;
 }
 
 /* =========================================
    4. メインコンテンツ（main）
    ========================================= */
+
+main {
+  padding-top: 85px;
+  margin: 0 auto;
+  min-height: 80vh;
+}
+
 .main-content {
   width: 100%;
 }
@@ -120,7 +194,7 @@ ul {
 .hero {
   background-color: var(--color-secondary);
   color: #fff;
-  padding: 80px 0;
+  padding: 300px 0;
   text-align: center;
 }
 
@@ -164,6 +238,43 @@ ul {
 
 .a-news-list dt {
   font-weight: bold;
+}
+
+/* =========================================
+   5. ニュース（news）修正
+   ========================================= */
+.news {
+  padding: 40px 20px;
+  text-align: center; /* タイトルなどを中央へ */
+}
+
+.news-head {
+  margin-bottom: 30px;
+  border-bottom: 2px solid var(--color-primary);
+  display: inline-block; /* 下線を文字幅に合わせる */
+  padding-bottom: 10px;
+}
+
+.news-title {
+  font-size: 28px;
+  color: var(--color-text-main);
+}
+
+.news-date {
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+.news-detail {
+  margin-top: 20px;
+  text-align: left; /* 本文は読みやすいように左寄せ（または中央） */
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 /* =========================================
