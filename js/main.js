@@ -1,56 +1,95 @@
 document.addEventListener('DOMContentLoaded', () => {
+    
+    // ----------------------------------------------------
+    // 1. ニュース読み込み (JSON方式)
+    // ----------------------------------------------------
+    async function loadNews() {
+        const container = document.getElementById('news-container');
+        if (!container) return;
+
+        try {
+            // news.jsonを読み込む
+            const response = await fetch('./news.json');
+            const data = await response.json();
+
+            // ファイル名の数値部分(0511など)で降順（新しい順）にソート
+            data.sort((a, b) => parseInt(b.file) - parseInt(a.file));
+
+            // 上位3件を取得
+            const latestNews = data.slice(0, 3);
+            container.innerHTML = ''; // 初期化
+
+            latestNews.forEach(item => {
+                const card = document.createElement('a');
+                card.href = `./history/news-2026/${item.file}`; //
+                card.className = 'news-card';
+                card.innerHTML = `
+                    <div class="news-card-body">
+                        <span class="news-card-date">${item.date}</span>
+                        <p class="news-card-text">${item.title}</p>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        } catch (error) {
+            console.error("ニュースの読み込みに失敗しました:", error);
+            container.innerHTML = '<p>お知らせはありません。</p>';
+        }
+    }
+    
+    // 実行
+    loadNews();
+
+    // ----------------------------------------------------
+    // 2. ヘッダー背景制御 (IntersectionObserver)
+    // ----------------------------------------------------
     const header = document.querySelector('#header-js');
     const heroSection = document.querySelector('#hero-section');
 
-    const observerOptions = {
-        // メインコンテンツが少しでも画面外に出始めたら判定
-        root: null,
-        rootMargin: "-80px 0px 0px 0px", // ヘッダーの高さ分くらいを判定基準にする
-        threshold: 0
-    };
+    if (header && heroSection) {
+        const observerOptions = {
+            root: null,
+            rootMargin: "-80px 0px 0px 0px",
+            threshold: 0
+        };
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // メインコンテンツ（青背景）の中にいる時
-                header.classList.add('is-hero');
-            } else {
-                // それ以外の白いエリアにいる時
-                header.classList.remove('is-hero');
-            }
-        });
-    }, observerOptions);
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    header.classList.add('is-hero');
+                } else {
+                    header.classList.remove('is-hero');
+                }
+            });
+        }, observerOptions);
 
-    observer.observe(heroSection);
+        observer.observe(heroSection);
+    }
 
-
-
-    // 検索バーアニメ
-
+    // ----------------------------------------------------
+    // 3. 検索バーアニメーション
+    // ----------------------------------------------------
     const searchBar = document.getElementById('search-bar');
     const searchInput = document.getElementById('search-input');
 
-    // 検索バー（またはアイコン）をクリックした時の動作
-    searchBar.addEventListener('click', function (e) {
-        // まだ開いていない場合のみ実行
-        if (!this.classList.contains('is-open')) {
-            this.classList.add('is-open');
-            searchInput.focus(); // 自動でカーソルを入れる
-        }
-    });
+    if (searchBar && searchInput) {
+        searchBar.addEventListener('click', function () {
+            if (!this.classList.contains('is-open')) {
+                this.classList.add('is-open');
+                searchInput.focus();
+            }
+        });
 
-    // 検索バーの外側をクリックしたら閉じる
-    document.addEventListener('click', function (e) {
-        if (!searchBar.contains(e.target)) {
-            searchBar.classList.remove('is-open');
-            searchInput.value = ""; // 閉じるときに中身をリセットする場合
-        }
-    });
-
-
+        document.addEventListener('click', function (e) {
+            if (!searchBar.contains(e.target)) {
+                searchBar.classList.remove('is-open');
+                searchInput.value = ""; 
+            }
+        });
+    }
 
     // ----------------------------------------------------
-    // ハンバーガーメニュー制御
+    // 4. ハンバーガーメニュー制御
     // ----------------------------------------------------
     const hamburger = document.getElementById('js-hamburger');
     const nav = document.getElementById('js-nav');
@@ -61,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
             nav.classList.toggle('is-open');
         });
 
-        // リンククリック時にメニューを閉じる
         const navLinks = document.querySelectorAll('.c-nav__item a');
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -72,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ----------------------------------------------------
-    // 「トップに戻る」ボタン制御
+    // 5. 「トップに戻る」ボタン制御
     // ----------------------------------------------------
     const backToTop = document.getElementById('js-back-to-top');
 
@@ -86,15 +124,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         backToTop.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
 
     // ----------------------------------------------------
-    // ニュースポップアップ（モーダル）制御
+    // 6. ニュースポップアップ（モーダル）制御
     // ----------------------------------------------------
     const newsTrigger = document.getElementById('js-news-trigger');
     const newsModal = document.getElementById('js-news-modal');
@@ -102,26 +137,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalBackdrop = document.getElementById('js-modal-backdrop');
 
     if (newsTrigger && newsModal && modalClose && modalBackdrop) {
-        // 開く
-        newsTrigger.addEventListener('click', () => {
-            newsModal.classList.add('is-active');
-            document.body.classList.add('is-modal-open');
-            newsModal.setAttribute('aria-hidden', 'false');
-        });
-
-        // 閉じる関数
         const closeModal = () => {
             newsModal.classList.remove('is-active');
             document.body.classList.remove('is-modal-open');
             newsModal.setAttribute('aria-hidden', 'true');
         };
 
+        newsTrigger.addEventListener('click', () => {
+            newsModal.classList.add('is-active');
+            document.body.classList.add('is-modal-open');
+            newsModal.setAttribute('aria-hidden', 'false');
+        });
+
         modalClose.addEventListener('click', closeModal);
         modalBackdrop.addEventListener('click', closeModal);
     }
 
     // ----------------------------------------------------
-    // 商品スライダー (c-scroller) 制御
+    // 7. スライダー制御
     // ----------------------------------------------------
     const track = document.getElementById('track');
     const prev = document.getElementById('prev');
@@ -139,7 +172,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         window.addEventListener('keydown', e => {
-            // フォーム入力中はスクロールさせない
             if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
 
             if (e.key === 'ArrowLeft') {

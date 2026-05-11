@@ -14,7 +14,9 @@
 /* =========================================
    2. 基本設定
    ========================================= */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -46,15 +48,15 @@ ul {
   left: 0;
   width: 100%;
   z-index: 1000;
-  
+
   background-color: white;
 }
 
 .header-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between; 
-  padding: 10px 30px; 
+  justify-content: space-between;
+  padding: 10px 30px;
   max-width: none;
 }
 
@@ -67,7 +69,7 @@ ul {
 
 .header-logo img {
   display: block;
-  width: 65px;  
+  width: 65px;
   height: 65px;
   object-fit: contain;
 }
@@ -105,21 +107,21 @@ ul {
 }
 
 .lang-change {
-    position: relative; 
-    display: flex;
-    align-items: center;
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .lang-change::before {
-    content: "";
-    display: block;
-    background: #DCDCDC;
-    width: 0.9px;
-    height: 30px;     
-    position: absolute;
-    left: 24px;
-    top: 50%;
-    transform: translateY(-50%); 
+  content: "";
+  display: block;
+  background: #DCDCDC;
+  width: 0.9px;
+  height: 30px;
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 /* 言語アイコン */
@@ -136,28 +138,35 @@ ul {
   display: flex;
   justify-content: space-between;
   gap: 7px;
-  background: #f0f0f0; 
+  background: #f0f0f0;
   padding: 7px 15px;
   border-radius: 20px;
   width: 100px;
 
-  transition: width 0.3s ease; /* 0.4秒かけて変化 */
-  overflow: hidden; /* はみ出た中身を隠す */
+  transition: width 0.3s ease;
+  /* 0.4秒かけて変化 */
+  overflow: hidden;
+  /* はみ出た中身を隠す */
   cursor: pointer;
 }
 
 .header-serach-bar.is-open {
-  width: 200px; /* 指定の300pxまで広げる */
+  width: 200px;
+  /* 指定の300pxまで広げる */
 }
 
 .header-serach-bar input {
   width: 100%;
-  background: none;   /* 背景を消す */
-  border: none;       /* 枠線を消す */
-  outline: none;      /* クリックした時の青い枠線も消す */
+  background: none;
+  /* 背景を消す */
+  border: none;
+  /* 枠線を消す */
+  outline: none;
+  /* クリックした時の青い枠線も消す */
   font-size: 13px;
   color: var(--color-text-muted);
-  padding: 0;         /* 余計な余白を消す */
+  padding: 0;
+  /* 余計な余白を消す */
   margin: 0;
 }
 
@@ -210,72 +219,61 @@ main {
 /* =========================================
    5. ニュース（top-news）
    ========================================= */
+
 .top-news {
-  padding: 40px 4%;
+  padding: 60px 4%;
   background: #fff;
 }
 
-.c-top-news {
-  display: flex;
-  align-items: center;
-  gap: 30px;
+.top-news-header {
+  max-width: 1000px;
+  margin: 0 auto 30px;
 }
 
-.top-news-text {
-  font-size: 24px;
+.top-news-title {
+  font-size: 26px;
   color: var(--color-primary);
-}
-
-.news-list {
-  border-left: 2px solid var(--color-primary);
-  padding-left: 20px;
-}
-
-.a-news-list {
-  display: flex;
-  gap: 15px;
-}
-
-.a-news-list dt {
   font-weight: bold;
 }
 
-/* =========================================
-   5. ニュース（news）修正
-   ========================================= */
-.news {
-  padding: 40px 20px;
-  text-align: center; /* タイトルなどを中央へ */
+.news-cards {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-.news-head {
-  margin-bottom: 30px;
-  border-bottom: 2px solid var(--color-primary);
-  display: inline-block; /* 下線を文字幅に合わせる */
-  padding-bottom: 10px;
+.news-card {
+  flex: 1;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.3s;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
-.news-title {
-  font-size: 28px;
-  color: var(--color-text-main);
+.news-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  border-color: var(--color-primary);
 }
 
-.news-date {
+.news-card-date {
+  font-size: 13px;
   color: var(--color-text-muted);
-  font-size: 14px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
 }
 
-.news-detail {
-  margin-top: 20px;
-  text-align: left; /* 本文は読みやすいように左寄せ（または中央） */
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  background: white;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+.news-card-text {
+  font-size: 15px;
+  font-weight: 500;
 }
+
+
 
 /* =========================================
    6. 論文スライダー（l-thesis）
