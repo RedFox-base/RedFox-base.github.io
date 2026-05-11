@@ -41,12 +41,12 @@
                 </div>
 
                 <form action="#" method="get" class="header-serach-bar" id="search-bar">
-                    <input type="text" name="q" placeholder="検索" aria-label="検索">
+                    <input type="text" name="q" placeholder="検索" aria-label="検索" id="search-input">
                     <button type="submit" style="background: none; border: none; padding: 0; cursor: pointer;">
                         <img src="assets/images/search-icon.png" alt="search-icon" id="search-icon">
                     </button>
                 </form>
-                
+
             </div>
         </div>
 
@@ -67,22 +67,12 @@
         </section>
 
         <section class="top-news">
-            <div class="c-top-news">
-                <div class="c-top-news-text">
-                    <h3 class="top-news-text">News</h3>
+            <div class="l-container">
+                <div class="top-news-header">
+                    <h3 class="top-news-title">News</h3>
+                    <a href="history/index.html" class="news-more">一覧を見る →</a>
                 </div>
-                <div class="l-top-news">
-                    <dl class="news-list">
-                        <a href="history/news-2026/0510.html" class="a-news-list">
-                            <dt>2025/05/10</dt>
-                            <dd>ヘッダー、ニュース、CSSの調整</dd>
-                        </a>
-                        <a href="history/news-2026/0508.html" class="a-news-list">
-                            <dt>2025/05/08</dt>
-                            <dd>初期版作成</dd>
-                        </a>
-                    </dl>
-                </div>
+                <div id="news-container" class="news-cards"></div>
             </div>
         </section>
 
