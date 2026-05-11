@@ -1,44 +1,54 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // ----------------------------------------------------
     // 1. ニュース読み込み (JSON方式)
     // ----------------------------------------------------
+    // main.js の loadNews 関数内
     async function loadNews() {
         const container = document.getElementById('news-container');
-        if (!container) return;
+        if (!container) {
+            console.error("news-container が見つかりません");
+            return;
+        }
 
         try {
-            // news.jsonを読み込む
+            // パスが正しいか確認（index.htmlと同じ階層にnews.jsonがある場合）
             const response = await fetch('./news.json');
+            if (!response.ok) throw new Error('Network response was not ok');
+
             const data = await response.json();
+            if (!Array.isArray(data)) throw new Error('news.json は配列である必要があります');
 
-            // ファイル名の数値部分(0511など)で降順（新しい順）にソート
-            data.sort((a, b) => parseInt(b.file) - parseInt(a.file));
+            const toTime = (dateStr) => {
+                const m = String(dateStr).match(/^(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})/);
+                if (!m) return 0;
+                return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3])).getTime();
+            };
 
-            // 上位3件を取得
+            data.sort((a, b) => toTime(b.date) - toTime(a.date));
+
             const latestNews = data.slice(0, 3);
-            container.innerHTML = ''; // 初期化
+            container.innerHTML = '';
 
             latestNews.forEach(item => {
                 const card = document.createElement('a');
-                card.href = `./history/news-2026/${item.file}`; //
+                // パスを news.json のデータに合わせて調整
+                card.href = `./history/news-2026/${item.file}`;
                 card.className = 'news-card';
                 card.innerHTML = `
-                    <div class="news-card-body">
-                        <span class="news-card-date">${item.date}</span>
-                        <p class="news-card-text">${item.title}</p>
-                    </div>
-                `;
+                <div class="news-card-body">
+                    <span class="news-card-date">${item.date}</span>
+                    <p class="news-card-text">${item.title}</p>
+                </div>
+            `;
                 container.appendChild(card);
             });
+            console.log("ニュースの読み込みに成功しました");
         } catch (error) {
             console.error("ニュースの読み込みに失敗しました:", error);
             container.innerHTML = '<p>お知らせはありません。</p>';
         }
     }
-    
-    // 実行
-    loadNews();
 
     // ----------------------------------------------------
     // 2. ヘッダー背景制御 (IntersectionObserver)
@@ -83,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('click', function (e) {
             if (!searchBar.contains(e.target)) {
                 searchBar.classList.remove('is-open');
-                searchInput.value = ""; 
+                searchInput.value = "";
             }
         });
     }
@@ -182,4 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    loadNews();
 });
