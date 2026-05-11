@@ -48,7 +48,19 @@
     </header>
 
 
-    <main></main>
+    <main class="history-page-main">
+        <section class="history-news" aria-labelledby="history-news-heading">
+            <div class="history-news__inner">
+                <h4 id="history-news-heading" class="history-news__heading">News一覧</h4>
+                <ul id="history-news-list" class="history-news__list"></ul>
+                <nav class="history-news__pager" id="history-news-pager" hidden aria-label="News一覧のページ送り">
+                    <button type="button" class="history-news__pager-btn" id="history-news-pager-prev" aria-label="前のページ">←</button>
+                    <span class="history-news__pager-label" id="history-news-pager-label">1 / 1</span>
+                    <button type="button" class="history-news__pager-btn" id="history-news-pager-next" aria-label="次のページ">→</button>
+                </nav>
+            </div>
+        </section>
+    </main>
 
     <footer class="footer">
         <div class="footer_inner">
@@ -60,7 +72,7 @@
                 <ul class="footer_nav-list">
                     <li class="footer-nav-list-item"><a href="../index.html">トップ</a></li>
                     <li class="footer-nav-list-item"><a href="../resume/index.html">経歴</a></li>
-                    <li class="footer-nav-list-item"><a href="../portfolio/index.html".html">実績</a></li>
+                    <li class="footer-nav-list-item"><a href="../portfolio/index.html">実績</a></li>
                     <li class="footer-nav-list-item"><a href="index.html">記録</a></li>
                 </ul>
             </div>

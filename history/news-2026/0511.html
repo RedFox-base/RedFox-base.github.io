@@ -6,7 +6,9 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>2026/05/10-news</title>
+        <title>
+            2026/05/11-news
+        </title>
         <link rel="stylesheet" href="../../css/style.css">
     </head>
 
@@ -51,17 +53,20 @@
         <section class="news">
             <button type="button" class="previous-button js-history-back" aria-label="前のページに戻る"></button>
             <div class="news-head">
-                <h4 class="news-title">ヘッダー、ニュース、CSSの調整</h4>
-                <p class="news-date">2026/05/10</p>
+                <h4 class="news-title">
+                    トップページのニュース欄について
+                </h4>
+                <p class="news-date">2026/05/11</p>
             </div>
             <div class="news-detail">
                 <div class="c-news-detail">
-                    <p>ヘッダーのロゴ作成、言語、検索アイコン調整。<br>
-                    ヘッダーのロゴを適当に作ってみた、リサイズしてフィットさせた。
-                    言語はトップページのみ試験的に作成、日本語←→英語で切り替えられるように。<br>
-                    検索機能はないが、UIとアニメーションは完成した。<br><br>
-                    次回はトップページの拡張と、ニュース一覧を作るつもり。<br>
-                    あと、トップに表示されるニュースはリセントで3つにしないとパンクしそう。</p>
+                    <p>
+                        Cusorの導入をして、格闘する事2時間。
+                        トップページのニュース欄のUIをカード形式にアップデート。<br>
+                        あらたにjsonファイルを作成し、javascriptでニュースを読み込むようにした。<br>
+                        ニュースは3つまで表示されるようにして、ニュースのナンバリングはデータベースから取得するようにした。<br>
+                        問題があったのはjsonファイルで、jsonはローカル上では読み込まれなく、リモートやGithub経由で開くことで表示された。
+                    </p>
                 </div>
             </div>
         </section>
