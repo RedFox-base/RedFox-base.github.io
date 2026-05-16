@@ -224,6 +224,53 @@ main {
   font-size: 18px;
 }
 
+.pankuzu {
+  padding: 20px 4% 0px;
+  background: #f7f9fb;
+}
+
+.c-pankuzu {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.c-pankuzu ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  font-size: 16px;
+}
+
+.c-pankuzu__item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.c-pankuzu__item:not(:first-child)::before {
+  content: '>';
+  padding-right: 5px;
+  padding-left: 5px;
+  margin-right: 6px;
+  color: var(--color-text-muted);
+}
+
+.c-pankuzu__item a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.c-pankuzu__item a:hover,
+.c-pankuzu__item a:focus {
+  text-decoration: underline;
+}
+
 /* =========================================
    5. ニュース（top-news）
    ========================================= */
@@ -231,6 +278,15 @@ main {
 .top-news {
   padding: 48px 4% 56px;
   background: transparent;
+}
+
+.news-more {
+  font-size: 14px;
+  color: var(--color-primary);
+  font-weight: bold;
+  text-decoration: none;
+  color: rgb(126, 126, 126);
+  margin-top: 8px;
 }
 
 /* ニュース3件：画面幅いっぱいにせず、角丸の明るいグレーで囲む */
@@ -247,6 +303,9 @@ main {
 .top-news-header {
   max-width: 1040px;
   margin: 0 auto 24px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
 }
 
 .top-news-title {
@@ -284,12 +343,23 @@ main {
   color: var(--color-text-muted);
   font-weight: bold;
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  align-self: flex-start;
+  position: relative;
+  top: 0;
 }
 
 .news-card-text {
   font-size: 15px;
   font-weight: 500;
+  text-align: left;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 /* =========================================
@@ -301,7 +371,7 @@ main {
 }
 
 .history-news {
-  padding: 40px 4% 60px;
+  padding: 10px 4% 20px;
   background: var(--color-bg-main);
 }
 
@@ -424,6 +494,87 @@ main {
   min-width: 4.5em;
   text-align: center;
   font-variant-numeric: tabular-nums;
+}
+
+/* =========================================
+   論文一覧（history-thesis）
+   ========================================= */
+.history-thesis {
+  padding: 10px 4% 80px;
+  background: var(--color-bg-main);
+}
+
+.history-thesis__inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.history-thesis__heading {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--color-primary);
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.history-thesis__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.history-thesis__item--empty {
+  list-style: none;
+}
+
+.history-thesis__empty-msg {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+}
+
+.history-thesis__card {
+  display: block;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  text-align: left;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.history-thesis__card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  border-color: var(--color-primary);
+}
+
+.history-thesis__card-date {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+}
+
+.history-thesis__card-title {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-main);
+  line-height: 1.45;
 }
 
 /* =========================================
