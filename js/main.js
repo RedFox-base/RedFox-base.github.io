@@ -15,6 +15,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // ----------------------------------------------------
     // 1. ニュース読み込み (JSON方式)
     // ----------------------------------------------------
+    const pathSegments = location.pathname.split('/').filter(Boolean);
+    const isEnglishPage = document.documentElement.lang.toLowerCase() === 'en' || pathSegments.includes('en');
+    const newsJsonPath = isEnglishPage ? '../news.json' : './news.json';
+    const newsCardHrefBase = isEnglishPage ? '../history/news-2026/' : './history/news-2026/';
+    const noNewsMessage = isEnglishPage ? 'There is nothing news.' : 'お知らせはありません。';
+
     async function loadNews() {
         const container = document.getElementById('news-container');
         if (!container) {
@@ -23,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const response = await fetch('./news.json');
+            const response = await fetch(newsJsonPath);
             if (!response.ok) throw new Error('Network response was not ok');
 
             const data = await response.json();
@@ -34,23 +40,25 @@ document.addEventListener('DOMContentLoaded', () => {
             const latestNews = data.slice(0, 3);
             container.innerHTML = '';
 
+            if (latestNews.length === 0) {
+                container.innerHTML = `<p>${noNewsMessage}</p>`;
+                return;
+            }
+
             latestNews.forEach(item => {
                 const card = document.createElement('a');
-                // パスを news.json のデータに合わせて調整
-                card.href = `./history/news-2026/${item.file}`;
+                card.href = `${newsCardHrefBase}${item.file}`;
                 card.className = 'news-card';
                 card.innerHTML = `
-                <div class="news-card-body">
-                    <span class="news-card-date">${item.date}</span>
-                    <p class="news-card-text">${item.title}</p>
-                </div>
+                <span class="news-card-date">${item.date}</span>
+                <p class="news-card-text">${item.title}</p>
             `;
                 container.appendChild(card);
             });
             console.log("ニュースの読み込みに成功しました");
         } catch (error) {
             console.error("ニュースの読み込みに失敗しました:", error);
-            container.innerHTML = '<p>お知らせはありません。</p>';
+            container.innerHTML = `<p>${noNewsMessage}</p>`;
         }
     }
 
@@ -297,6 +305,44 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // ----------------------------------------------------
+    // 10. 記録ページ 論文一覧（history/index.html）
+    // ----------------------------------------------------
+    async function loadThesisList() {
+        const listEl = document.getElementById('history-thesis-list');
+        if (!listEl) return;
+
+        try {
+            const response = await fetch('../thesis.json');
+            if (!response.ok) throw new Error('Network response was not ok');
+            const data = await response.json();
+            if (!Array.isArray(data)) throw new Error('thesis.json は配列である必要があります');
+            
+            const items = [...data].sort((a, b) => parseNewsDateKey(b.date) - parseNewsDateKey(a.date));
+            
+            listEl.innerHTML = '';
+            if (items.length === 0) {
+                listEl.innerHTML = '<li class="history-thesis__item history-thesis__item--empty"><p class="history-thesis__empty-msg">論文はありません。</p></li>';
+                return;
+            }
+            
+            items.forEach((item) => {
+                const li = document.createElement('li');
+                li.className = 'history-thesis__item';
+                const a = document.createElement('a');
+                a.className = 'history-thesis__card';
+                a.href = `./thesis/${item.file}`;
+                a.innerHTML = `<span class="history-thesis__card-date">${escapeHtml(item.date)}</span><span class="history-thesis__card-title">${escapeHtml(item.title)}</span>`;
+                li.appendChild(a);
+                listEl.appendChild(li);
+            });
+        } catch (error) {
+            console.error('記録ページ論文の読み込みに失敗しました:', error);
+            listEl.innerHTML = '<li class="history-thesis__item history-thesis__item--empty"><p class="history-thesis__empty-msg">一覧を読み込めませんでした。</p></li>';
+        }
+    }
+
     loadNews();
     loadHistoryNewsList();
+    loadThesisList();
 });
